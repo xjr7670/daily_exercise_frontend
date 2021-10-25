@@ -35,6 +35,7 @@
 <script src="./js/elementui-index.js"></script>
 <script type="text/javascript" src="./js/axios.min.js"></script>
 <script>
+
     function makeData() {
         var data = Array();
         for (var i = 1; i <= 64; i++) {
@@ -55,7 +56,7 @@
       methods: {
         onSubmit() {
             console.log(this.items)
-            axios.post('http://127.0.0.1:8000/daily/daily', 
+            axios.post('http://localhost:8000/daily/daily', 
                 {
                         result: this.result,
                         pushup: this.pushup
@@ -70,7 +71,17 @@
             }).catch(function(error) {
                 console.log(error);
             });
+        },
+        getData() {
+            axios.get('http://localhost:8000/daily/get_data').then((response)=>{
+                let data = response.data;
+                let items = data.split('-')[1].trim().split(',');
+                this.result = items.map(item => parseInt(item, 10));
+            })
         }
+      },
+      mounted: function() {
+          this.getData();
       }
     })
 </script>
