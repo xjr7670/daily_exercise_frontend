@@ -55,7 +55,6 @@
       },
       methods: {
         onSubmit() {
-            console.log(this.items)
             axios.post('/daily/api', 
                 {
                         result: this.result,
@@ -67,7 +66,7 @@
                     }
                 }
             ).then(function (response) {
-                console.log(response.data);
+                console.log("操作成功！");
             }).catch(function(error) {
                 console.log(error);
             });
