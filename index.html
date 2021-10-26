@@ -28,6 +28,9 @@
         <el-form-item>
             <el-button type="primary" @click="onSubmit">更新</el-button>
         </el-form-item>
+        <el-row type="flex" justify="end">
+            <label>Today: {{ today }}</label>
+        </el-row>
     </el-form>
 </el-container>
 
@@ -46,12 +49,22 @@
         }
         return data;
     }
+
+    function getDate() {
+        var d = new Date();
+        let year = d.getFullYear();
+        let mon = d.getMonth() + 1;
+        let day = d.getDate();
+        return year + '-' + mon + '-' + day;
+    }
+
     var app = new Vue({
       el: '#main-container',
       data: {
         items: makeData(),
         pushup: 0,
-        result: []
+        result: [],
+        today: getDate(),
       },
       methods: {
         onSubmit() {
