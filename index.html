@@ -56,7 +56,7 @@
       methods: {
         onSubmit() {
             console.log(this.items)
-            axios.post('http://localhost:8000/daily/api', 
+            axios.post('/daily/api', 
                 {
                         result: this.result,
                         pushup: this.pushup
@@ -73,7 +73,7 @@
             });
         },
         getData() {
-            axios.get('http://localhost:8000/daily/get_data').then((response)=>{
+            axios.get('/daily/get_data').then((response)=>{
                 let data = response.data;
                 let items = data.split('-')[1].trim().split(',');
                 this.result = items.map(item => parseInt(item, 10));
