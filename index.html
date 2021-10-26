@@ -20,8 +20,8 @@
             <el-input placeholder="做了多少个？" v-model="pushup" class="fwc"></el-input>
         </el-row>
         <el-row>
-            <label>iCourse163 天气学课程</label><br/>
-            <el-checkbox-group v-model="result">
+            <label>{{ courseName }}</label><br/>
+            <el-checkbox-group v-model="whatched">
                 <el-checkbox v-for="item in items" :key="item.id" :label="item.id">{{ item.name }}</el-checkbox>
             </el-checkbox-group>
         </el-row>
@@ -63,15 +63,17 @@
       data: {
         items: makeData(),
         pushup: 0,
-        result: [],
+        courseName: "B站气象学课程",
+        whatched: [],
         today: getDate(),
       },
       methods: {
         onSubmit() {
             axios.post('/daily/api', 
                 {
-                        result: this.result,
-                        pushup: this.pushup
+                    courseName: this.courseName,
+                    whatched: this.whatched,
+                    pushup: this.pushup
                 },
                 {
                     headers: {
@@ -87,8 +89,8 @@
         getData() {
             axios.get('/daily/get_data').then((response)=>{
                 let data = response.data;
-                let items = data.split('-')[1].trim().split(',');
-                this.result = items.map(item => parseInt(item, 10));
+                let items = data.split(',');
+                this.whatched = items.map(item => parseInt(item, 10));
             })
         }
       },
