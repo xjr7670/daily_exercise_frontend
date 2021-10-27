@@ -39,9 +39,9 @@
 <script type="text/javascript" src="./js/axios.min.js"></script>
 <script>
 
-    function makeData() {
+    function makeData(num) {
         var data = Array();
-        for (var i = 1; i <= 64; i++) {
+        for (var i = 1; i <= num; i++) {
             let d = new Object();
             d.id = i;
             d.name = `第${i}节`;
@@ -61,7 +61,7 @@
     var app = new Vue({
       el: '#main-container',
       data: {
-        items: makeData(),
+        items: makeData(64),
         pushup: 0,
         courseName: "B站气象学课程",
         whatched: [],
