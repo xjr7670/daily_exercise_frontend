@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>学习+锻炼</title>
+    <script src="./js/echarts.min.js"></script>
+    <script src="./js/axios.min.js"></script>
+    <style type="text/css">
+        #fws, #course {
+            width:  65%;
+            height: 400px;
+        }
+    </style>
+</head>
+<body>
+    <div id="main">
+        <div id="fws"></div>
+        <div id="course"></div>
+    </div>
+
+    <script type="text/javascript">
+
+        
+        axios.get('/daily/get_data').then((res) => {
+            let data = res.data;
+            let fwc_data = data.pushup;
+            let fwc_x = new Array();
+            let fwc_y = new Array();
+            for (var i = 0; i < fwc_data.length; i++) {
+                fwc_x.push(fwc_data[i].date);
+                fwc_y.push(fwc_data[i].num);
+            }
+            
+            var bar = echarts.init(document.getElementById('fws'));
+
+            var barOption = {
+                title: {
+                    text: '俯卧撑',
+                },
+                tooltip: {},
+                legend: {
+                    data: [],
+                },
+                xAxis: {
+                    data: fwc_x,
+                },
+                yAxis: {},
+                series: [
+                    {
+                        name: '完成数',
+                        type: 'bar',
+                        data: fwc_y,
+                    }
+                ]
+            };
+            bar.setOption(barOption);
+
+            let finished = data.course.watched.split(',').length;
+            let total = 64;
+            var pie = echarts.init(document.getElementById('course'));
+            var pieOption = {
+                title: {
+                    text: '气象学课程完成情况',
+                },
+                tooltip: {},
+                legend: {
+                    data: [],
+                },
+                series: [
+                    {
+                        'type': 'pie',
+                        data: [
+                            {
+                                value: finished,
+                                name: '已完成'
+                            },
+                            {
+                                value: total - finished,
+                                name: '未完成'
+                            }
+                        ],
+                        'label': {
+                            show: true,
+                            formatter: "{c}",
+                            position: "inside",
+                        }
+                        // radius: '50%',
+                    }
+                ]
+            }
+            pie.setOption(pieOption);
+            console.log(data);
+        });
+        
+    </script>
+</body>
+</html>
