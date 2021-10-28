@@ -28,7 +28,7 @@ var app = new Vue({
   },
   methods: {
     onSubmit() {
-        axios.post('/daily/api', 
+        axios.post('/daily/update', 
             {
                 courseName: this.courseName,
                 whatched: this.whatched,
