@@ -11,7 +11,7 @@ function makeData(num) {
 
 function getDate() {
     var d = new Date();
-    var ret = d.toLocalDateString().replaceAll('/', '-');
+    var ret = d.toLocaleDateString().replaceAll('/', '-');
     return ret;
 }
 
