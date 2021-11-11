@@ -11,10 +11,8 @@ function makeData(num) {
 
 function getDate() {
     var d = new Date();
-    let year = d.getFullYear();
-    let mon = d.getMonth() + 1;
-    let day = d.getDate();
-    return year + '-' + mon + '-' + day;
+    var ret = d.toLocalDateString().replaceAll('/', '-');
+    return ret;
 }
 
 var app = new Vue({
