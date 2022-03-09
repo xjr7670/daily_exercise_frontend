@@ -62,11 +62,12 @@
             bar.setOption(barOption);
 
             let finished = data.course.watched.split(',').length;
-            let total = 64;
+            let cname = data.course.name;
+            let total = 55;
             var pie = echarts.init(document.getElementById('course'));
             var pieOption = {
                 title: {
-                    text: '气象学课程完成情况',
+                    text: cname + '完成情况',
                 },
                 tooltip: {},
                 legend: {
