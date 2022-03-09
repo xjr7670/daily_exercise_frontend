@@ -18,10 +18,10 @@ function getDate() {
 var app = new Vue({
   el: '#main-container',
   data: {
-    items: makeData(64),
+    items: makeData(55),
     pushup: 0,
-    courseName: "B站气象学课程",
-    whatched: [],
+    courseName: "B站英语语法课程",
+    watched: [],
     today: getDate(),
   },
   methods: {
@@ -29,7 +29,7 @@ var app = new Vue({
         axios.post('/daily/update', 
             {
                 courseName: this.courseName,
-                whatched: this.whatched,
+                watched: this.watched,
                 pushup: this.pushup
             },
             {
@@ -47,9 +47,12 @@ var app = new Vue({
         axios.get('/daily/get_data').then((response)=>{
             let data = response.data;
             this.apiData = data;
-            let whatched = data.course.watched.split(",");
-            this.whatched = whatched.map(item => parseInt(item, 10));
+            let watched = data.course.watched.split(",");
+            this.watched = watched.map(item => parseInt(item, 10));
         })
+    },
+    onReset() {
+        this.watched = [];
     }
   },
   mounted: function() {
