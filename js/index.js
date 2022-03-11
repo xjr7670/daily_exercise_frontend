@@ -46,7 +46,14 @@ var app = new Vue({
     getData() {
         axios.get('/daily/get_data').then((response)=>{
             let data = response.data;
-            this.apiData = data;
+            // this.apiData = data;
+            let lastPushup = data.pushup[data.pushup.length-1];
+            let lastPushupDate = lastPushup.date;
+            lastPushupDate = lastPushupDate.substr(0, 4) + '-' + lastPushupDate.substr(4, 2) + '-' + lastPushupDate.substr(6, 2);
+            let lastDate = new Date(lastPushupDate).toLocaleDateString().replaceAll('/', '-');
+            if (lastDate == this.today) {
+                this.pushup = lastPushup.num;
+            }
             let watched = data.course.watched.split(",");
             this.watched = watched.map(item => parseInt(item, 10));
         })
