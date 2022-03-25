@@ -18,15 +18,23 @@
 <el-container id="main-container">
     <el-form>
         <el-row>
-            <label>俯卧撑： </label>
+            <h3>俯卧撑： </h3>
             <el-input placeholder="做了多少个？" v-model="pushup" class="fwc"></el-input>
         </el-row>
+        <br />
         <el-row>
-            <label>{{ courseName }}</label><br/>
+            <h3>{{ courseName }}</h3><br/>
             <el-checkbox-group v-model="watched">
                 <el-checkbox v-for="item in items" :key="item.id" :label="item.id">{{ item.name }}</el-checkbox>
             </el-checkbox-group>
         </el-row>
+        <br/>
+        <el-row>
+            <h3>{{ courseName2 }}</h3><br/>
+            <el-checkbox-group v-model="watched2">
+                <el-checkbox v-for="item in items2" :key="item.id" :label="item.id">{{ item.name }}</el-checkbox>
+            </el-checkbox-group>
+        </el-row>        
         <el-form-item>
             <el-button type="primary" @click="onSubmit">更新</el-button>
             &nbsp;&nbsp;&nbsp;&nbsp;

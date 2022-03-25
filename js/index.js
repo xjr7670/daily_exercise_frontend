@@ -19,9 +19,12 @@ var app = new Vue({
   el: '#main-container',
   data: {
     items: makeData(55),
+    items2: makeData(587),
     pushup: 0,
     courseName: "B站英语语法课程",
     watched: [],
+    watched2: [],
+    courseName2: "B站英语听力 Daily English Dictation",
     today: getDate(),
   },
   methods: {
@@ -29,7 +32,9 @@ var app = new Vue({
         axios.post('/daily/update', 
             {
                 courseName: this.courseName,
+                courseName2: this.courseName2,
                 watched: this.watched,
+                watched2: this.watched2,
                 pushup: this.pushup
             },
             {
@@ -54,8 +59,11 @@ var app = new Vue({
             if (lastDate == this.today) {
                 this.pushup = lastPushup.num;
             }
-            let watched = data.course.watched.split(",");
+            var course = data.course;
+            let watched = course[this.courseName].watched.split(",");
+            let watched2 = course[this.courseName2].watched.split(",");
             this.watched = watched.map(item => parseInt(item, 10));
+            this.watched2 = watched2.map(item => parseInt(item, 10));
         })
     },
     onReset() {
@@ -65,4 +73,5 @@ var app = new Vue({
   mounted: function() {
       this.getData();
   }
-})
+});
+
