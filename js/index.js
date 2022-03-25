@@ -70,9 +70,6 @@ var app = new Vue({
                 this.pushup = lastPushup.num;
             }
             var course = data.course;
-            console.log(course);
-            console.log(Object.keys(course));
-            console.log(this.courseName);
             let watched = course[this.courseName].watched.split(",");
             let watched2 = course[this.courseName2].watched.split(",");
             this.watched = watched.map(item => parseInt(item, 10));
