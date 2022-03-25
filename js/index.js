@@ -49,7 +49,17 @@ var app = new Vue({
         });
     },
     getData() {
-        axios.get('/daily/get_data').then((response)=>{
+        axios.post('/daily/get_data', 
+            {
+                courseName: this.courseName,
+                courseName2: this.courseName2          
+            }, 
+            {
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }            
+            }
+        ).then((response)=>{
             let data = response.data;
             // this.apiData = data;
             let lastPushup = data.pushup[data.pushup.length-1];
@@ -67,7 +77,9 @@ var app = new Vue({
             let watched2 = course[this.courseName2].watched.split(",");
             this.watched = watched.map(item => parseInt(item, 10));
             this.watched2 = watched2.map(item => parseInt(item, 10));
-        })
+        }).catch((error)=> {
+            console.log(error);
+        });
     },
     onReset() {
         this.watched = [];
