@@ -9,22 +9,43 @@
     <link rel="icon" href="./images/exercise.png" type="image/x-icon" />
     <link rel="shortcut icon" href="./images/exercise.png" type="image/x-icon" />    
     <style type="text/css">
-        #fws, #course {
+        #fws {
             width:  65%;
             height: 400px;
+        }
+        #course1, #course2 {
+            width: 400px;
+            height: 400px;
+            float: left;
         }
     </style>
 </head>
 <body>
     <div id="main">
         <div id="fws"></div>
-        <div id="course"></div>
+        <br/>
+        <div class="chart">
+            <div id="course1"></div>
+            <div id="course2"></div>
+        </div>
+        
     </div>
 
     <script type="text/javascript">
 
-        
-        axios.get('/daily/get_data').then((res) => {
+        var c1 = 'B站英语语法课程';
+        var c2 = 'B站英语听力 Daily English Dictation';
+
+
+        axios.post('/daily/get_data', 
+            {
+                courseName: c1,
+                courseName2: c2
+            }, 
+            {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        ).then((res) => {
             let data = res.data;
             let fwc_data = data.pushup;
             let fwc_x = new Array();
@@ -61,13 +82,22 @@
             };
             bar.setOption(barOption);
 
-            let finished = data.course.watched.split(',').length;
-            let cname = data.course.name;
-            let total = 55;
-            var pie = echarts.init(document.getElementById('course'));
-            var pieOption = {
+            var course = data.course;
+
+            showPie(course, c1, 55, 'course1');
+            showPie(course, c2, 587, 'course2');
+
+
+            console.log(data);
+        });
+
+        function showPie(course, name, total, tagId) {
+            let finished = course[name].watched.split(',').length;
+            var pie = echarts.init(document.getElementById(tagId));
+            
+            var option = {
                 title: {
-                    text: cname + '完成情况',
+                    text: name + '完成情况',
                 },
                 tooltip: {},
                 legend: {
@@ -95,9 +125,8 @@
                     }
                 ]
             }
-            pie.setOption(pieOption);
-            console.log(data);
-        });
+            pie.setOption(option);            
+        }
         
     </script>
 </body>
