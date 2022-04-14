@@ -11,6 +11,13 @@
         form {
             width: 60%;
         }
+        div.el-checkbox-group {
+            font-size: 24px;
+        }
+        span.el-checkbox__label {
+            font-size: 18px;
+            line-height: 32px;
+        }
     </style>
 </head>
 <body>
@@ -24,8 +31,8 @@
         <br />
         <el-row>
             <h3>{{ courseName }}</h3><br/>
-            <el-checkbox-group v-model="watched">
-                <el-checkbox v-for="item in items" :key="item.id" :label="item.id">{{ item.name }}</el-checkbox>
+            <el-checkbox-group size="medium" v-model="watched">
+                <el-checkbox v-for="item in items" style="display: block;" :key="item.id" :label="item.id">{{ item.name }}</el-checkbox>
             </el-checkbox-group>
         </el-row>
         <br/>
