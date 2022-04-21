@@ -56,10 +56,11 @@ function preDefine() {
 var app = new Vue({
   el: '#main-container',
   data: {
-    items: preDefine(),
+    items: makeData(78),
     items2: makeData(587),
     pushup: 0,
-    courseName: "BEC学生用书(初级)",
+    // courseName: "BEC学生用书(初级)",
+    courseName: "走遍美国",
     watched: [],
     watched2: [],
     courseName2: "B站英语听力 Daily English Dictation",
