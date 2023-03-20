@@ -26,14 +26,14 @@
             <el-input placeholder="做了多少个？" v-model="pushup" class="fwc"></el-input>
         </el-row>
         <br />
-        <el-row>
+        <el-row style="display: none">
             <h3>{{ courseName }}</h3><br/>
             <el-checkbox-group size="medium" v-model="watched">
-                <el-checkbox v-for="item in items" style="display: block;" :key="item.id" :label="item.id">{{ item.name }}</el-checkbox>
+                <el-checkbox v-for="item in items" :key="item.id" :label="item.id">{{ item.name }}</el-checkbox>
             </el-checkbox-group>
         </el-row>
         <br/>
-        <el-row>
+        <el-row style="display: none">
             <h3>{{ courseName2 }}</h3><br/>
             <el-checkbox-group v-model="watched2">
                 <el-checkbox v-for="item in items2" :key="item.id" :label="item.id">{{ item.name }}</el-checkbox>
